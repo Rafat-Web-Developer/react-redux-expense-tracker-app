@@ -2,9 +2,9 @@ import deleteImage from "../../assets/images/delete.svg";
 import editImage from "../../assets/images/edit.svg";
 
 export default function Transaction({ transaction }) {
-  const { name, amount } = transaction;
+  const { name, amount, type } = transaction;
   return (
-    <li className='transaction income'>
+    <li className={`transaction ${type}`}>
       <p>{name}</p>
       <div className='right'>
         <p>৳ {amount}</p>
