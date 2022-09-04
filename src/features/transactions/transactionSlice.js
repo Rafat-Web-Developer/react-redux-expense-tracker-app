@@ -9,14 +9,14 @@ const initialState = {
 };
 
 // create thunks
-const fetchAllTransactions = createAsyncThunk(
+export const fetchAllTransactions = createAsyncThunk(
   "transaction/fetchAllTransactions",
   async () => {
     const transactions = await fetchTransactions();
     return transactions;
   }
 );
-const createTransaction = createAsyncThunk(
+export const createTransaction = createAsyncThunk(
   "transaction/createTransaction",
   async (data) => {
     const transaction = await addTransaction(data);
@@ -46,7 +46,7 @@ const transactionSlice = createSlice({
         state.transactions = [];
         state.isLoading = false;
         state.isError = true;
-        state.error = action.error.message;
+        state.error = action.error?.message;
       })
       .addCase(createTransaction.pending, (state) => {
         state.isError = false;
@@ -64,7 +64,7 @@ const transactionSlice = createSlice({
         state.transactions = [];
         state.isLoading = false;
         state.isError = true;
-        state.error = action.error.message;
+        state.error = action.error?.message;
       });
   },
 });
