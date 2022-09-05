@@ -161,7 +161,9 @@ label {
 .red {
     background-color: #e6425e !important;
 }
-
+.text-red{
+    color: red;
+}
 .cancel_edit {
     margin-top: 10px;
     background-color: #e6425e !important;

@@ -11,7 +11,12 @@ export default function Transactions() {
   }, [dispatch]);
   return (
     <>
-      <p className='second_heading'>Your Transactions:</p>
+      <p
+        className={`second_heading ${
+          transactions.length === 0 ? "text-red" : ""
+        }`}>
+        {transactions.length === 0 ? "Empty Transaction" : "Your Transactions:"}
+      </p>
 
       <div className='container_of_list_of_transactions'>
         <ul>
