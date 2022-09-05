@@ -12,8 +12,11 @@ const filterSlice = createSlice({
     setType: (state, action) => {
       state.type = action.payload;
     },
+    setSearch: (state, action) => {
+      state.search = action.payload;
+    },
   },
 });
 
 export default filterSlice.reducer;
-export const { setType } = filterSlice.actions;
+export const { setType, setSearch } = filterSlice.actions;

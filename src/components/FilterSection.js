@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setType } from "../features/filter/filterSlice";
+import { setSearch, setType } from "../features/filter/filterSlice";
 
 const FilterSection = () => {
   const { type } = useSelector((state) => state.filters);
   const dispatch = useDispatch();
+  const [searchText, setSearchText] = useState("");
   const handleType = (typeName) => {
     dispatch(setType(typeName));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(setSearch(searchText));
+    setSearchText("");
   };
   return (
     <div className='radio_group'>
@@ -26,12 +33,16 @@ const FilterSection = () => {
         onChange={(e) => handleType(e.target.value)}
       />
       <label>Expense</label>
-      <input
-        style={{ marginLeft: "50px" }}
-        type='text'
-        name='transaction_name'
-        placeholder='search'
-      />
+      <form onSubmit={handleSubmit}>
+        <input
+          style={{ marginLeft: "50px" }}
+          type='text'
+          name='transaction_name'
+          value={searchText}
+          placeholder='search'
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+      </form>
     </div>
   );
 };
