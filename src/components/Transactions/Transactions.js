@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllTransactions } from "../../features/transactions/transactionSlice";
 import Transaction from "./Transaction";
+import { resetFilter } from "../../features/filter/filterSlice";
 
 export default function Transactions() {
   const { transactions } = useSelector((state) => state.transactions);
+  const filterData = useSelector((state) => state.filters);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchAllTransactions());
-  }, [dispatch]);
+    dispatch(resetFilter());
+    dispatch(fetchAllTransactions(filterData));
+  }, [dispatch, filterData]);
 
   let lastTransactions = [];
   if (transactions.length !== 0) {

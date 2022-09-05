@@ -195,6 +195,21 @@ label {
     text-decoration: none;
 }
 
+.pagination{
+    display: flex;
+    justify-content: end;
+}
+
+.pageNumber{
+    background-color: #b7cddb;
+    padding: 5px 10px;
+    margin: 0px 5px;
+    border-radius: 30px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 @media (max-width: 450px) {
     .top_card,
     .form {

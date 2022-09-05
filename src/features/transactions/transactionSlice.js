@@ -12,13 +12,14 @@ const initialState = {
   isError: false,
   error: "",
   editing: {},
+  total: 0,
 };
 
 // create thunks
 export const fetchAllTransactions = createAsyncThunk(
   "transaction/fetchAllTransactions",
-  async () => {
-    const transactions = await fetchTransactions();
+  async (filterData) => {
+    const transactions = await fetchTransactions(filterData);
     return transactions;
   }
 );
@@ -67,7 +68,8 @@ const transactionSlice = createSlice({
         state.isError = false;
         state.isLoading = false;
         state.error = "";
-        state.transactions = action.payload;
+        state.transactions = action.payload.searchData;
+        state.total = action.payload.totalData;
       })
       .addCase(fetchAllTransactions.rejected, (state, action) => {
         state.transactions = [];
