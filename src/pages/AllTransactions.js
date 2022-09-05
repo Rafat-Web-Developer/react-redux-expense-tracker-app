@@ -2,15 +2,14 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FilterSection from "../components/FilterSection";
 import Transaction from "../components/Transactions/Transaction";
-import { fetchAllTransactions } from "../features/transactions/transactionSlice";
+import { filteredTransactions } from "../features/filter/filterSlice";
 
 const AllTransactions = () => {
-  const { transactions } = useSelector((state) => state.transactions);
-  const { type } = useSelector((state) => state.filters);
+  const { transactions, type, search } = useSelector((state) => state.filters);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchAllTransactions());
-  }, [dispatch]);
+    dispatch(filteredTransactions({ search, type }));
+  }, [dispatch, search, type]);
   return (
     <div className='container_of_list_of_transactions'>
       {transactions.length > 0 && <FilterSection />}
