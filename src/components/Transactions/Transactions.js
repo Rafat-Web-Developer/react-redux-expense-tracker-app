@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllTransactions } from "../../features/transactions/transactionSlice";
 import Transaction from "./Transaction";
@@ -9,6 +10,14 @@ export default function Transactions() {
   useEffect(() => {
     dispatch(fetchAllTransactions());
   }, [dispatch]);
+
+  let lastTransactions = [];
+  if (transactions.length !== 0) {
+    for (let i = transactions?.length - 1; i >= 0; i--) {
+      lastTransactions.push(transactions[i]);
+    }
+  }
+
   return (
     <>
       <p
@@ -20,10 +29,20 @@ export default function Transactions() {
 
       <div className='container_of_list_of_transactions'>
         <ul>
-          {transactions?.map((transaction) => (
-            <Transaction key={transaction.id} transaction={transaction} />
-          ))}
+          {lastTransactions.length !== 0 &&
+            lastTransactions
+              ?.splice(0, 5)
+              .map((transaction) => (
+                <Transaction key={transaction.id} transaction={transaction} />
+              ))}
         </ul>
+        {transactions.length >= 5 && (
+          <div className='view-more'>
+            <Link to='/allTransactions' className='btn'>
+              View More
+            </Link>
+          </div>
+        )}
       </div>
     </>
   );

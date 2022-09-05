@@ -1,7 +1,6 @@
 import axios from "../../utils/axiosInstance";
 
 export const fetchTransactions = async () => {
-  console.log("Come");
   const response = await axios.get("/transactions");
   return response.data;
 };
